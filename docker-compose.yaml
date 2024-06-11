@@ -1,4 +1,3 @@
-giversion: "3"
 services:
   nginx:
     build:
