@@ -24,6 +24,17 @@ RUN echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)"
     && echo "xdebug.remote_host=host.docker.internal" >> /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.idekey=PHPSTORM" >> /usr/local/etc/php/conf.d/xdebug.ini
 
+RUN apk --no-cache add git unzip
+
+# Встановлюємо Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Копіюємо файли проєкту до директорії /var/www/html
+COPY . /var/www/html
+
+# Встановлюємо залежності через Composer
+WORKDIR /var/www/html
+RUN composer install
 # Видалення тимчасових залежностей
 RUN apk del .build-deps
 
