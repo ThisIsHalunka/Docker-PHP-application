@@ -9,7 +9,7 @@ try {
     $client = new Client();
 
     // Здійснюємо GET запит до прикладного API
-    $response = $client->request('GET', 'https://jsonplaceholder.typicode.com/todos/1');
+    $response = $client->request('GET', 'https://jsonplaceholder.typicode.com/todos/12');
 
     // Отримуємо статусний код відповіді
     $statusCode = $response->getStatusCode();
@@ -28,4 +28,4 @@ try {
 } catch (Exception $e) {
     echo 'Caught exception: ',  $e->getMessage(), "\n";
 }
-?>
+
