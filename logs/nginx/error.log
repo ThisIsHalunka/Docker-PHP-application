@@ -486,3 +486,22 @@
 2024/06/16 13:03:21 [notice] 1#1: start worker process 39
 2024/06/16 13:03:21 [notice] 1#1: start worker process 40
 2024/06/16 13:03:27 [error] 29#29: *2 open() "/var/www/html/favicon.ico" failed (2: No such file or directory), client: 172.18.0.1, server: , request: "GET /favicon.ico HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/"
+2024/06/17 20:03:59 [notice] 1#1: using the "epoll" event method
+2024/06/17 20:03:59 [notice] 1#1: nginx/1.27.0
+2024/06/17 20:03:59 [notice] 1#1: built by gcc 13.2.1 20231014 (Alpine 13.2.1_git20231014) 
+2024/06/17 20:03:59 [notice] 1#1: OS: Linux 5.15.146.1-microsoft-standard-WSL2
+2024/06/17 20:03:59 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2024/06/17 20:03:59 [notice] 1#1: start worker processes
+2024/06/17 20:03:59 [notice] 1#1: start worker process 29
+2024/06/17 20:03:59 [notice] 1#1: start worker process 30
+2024/06/17 20:03:59 [notice] 1#1: start worker process 31
+2024/06/17 20:03:59 [notice] 1#1: start worker process 32
+2024/06/17 20:03:59 [notice] 1#1: start worker process 33
+2024/06/17 20:03:59 [notice] 1#1: start worker process 34
+2024/06/17 20:03:59 [notice] 1#1: start worker process 35
+2024/06/17 20:03:59 [notice] 1#1: start worker process 36
+2024/06/17 20:03:59 [notice] 1#1: start worker process 37
+2024/06/17 20:03:59 [notice] 1#1: start worker process 38
+2024/06/17 20:03:59 [notice] 1#1: start worker process 39
+2024/06/17 20:03:59 [notice] 1#1: start worker process 40
+2024/06/17 20:04:07 [error] 31#31: *2 open() "/var/www/html/favicon.ico" failed (2: No such file or directory), client: 172.20.0.1, server: , request: "GET /favicon.ico HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/"

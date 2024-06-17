@@ -1,31 +1,13 @@
 <?php
 
-require 'vendor/autoload.php';
+require_once 'ZendeskAPI.php';
+require_once 'ZendeskTicketExporter.php';
 
-use GuzzleHttp\Client;
+$subdomain = 'halunka';
+$email = 'thisishalunka@gmail.com';
+$token = 'PdYbh8qQ3JP3WminxCHV0pXufGZKQ1X7GmE6gYBE';
 
-try {
-    // Створюємо нового клієнта Guzzle
-    $client = new Client();
+$api = new ZendeskAPI($subdomain, $email, $token);
+$exporter = new ZendeskTicketExporter($api);
 
-    // Здійснюємо GET запит до прикладного API
-    $response = $client->request('GET', 'https://jsonplaceholder.typicode.com/todos/12');
-
-    // Отримуємо статусний код відповіді
-    $statusCode = $response->getStatusCode();
-
-    // Отримуємо тіло відповіді
-    $body = $response->getBody();
-
-    // Декодуємо JSON відповідь
-    $data = json_decode($body, true);
-
-    // Виводимо отримані дані
-    echo "Status Code: " . $statusCode . PHP_EOL;
-    echo "Response Body: " . PHP_EOL;
-    print_r($data);
-
-} catch (Exception $e) {
-    echo 'Caught exception: ',  $e->getMessage(), "\n";
-}
-
+$exporter->exportTicketsToCsv('tickets.csv');
