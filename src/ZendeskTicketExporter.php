@@ -13,15 +13,15 @@ class ZendeskTicketExporter
     {
         $tickets = $this->api->getTickets();
 
-        $fp = fopen($filename, 'w', 'b'); // Додано 'b' для бінарного режиму
+        $fp = fopen($filename, 'w', 'b');
         stream_filter_append($fp, 'convert.iconv.UTF-8/UTF-8', STREAM_FILTER_READ);
 
         fputcsv($fp, [
             'Ticket ID', 'Description', 'Status', 'Priority',
             'Agent ID', 'Agent Name', 'Agent Email',
-            'Contact ID', 'Contact Name', 'Requester Email', // Змінено тут
+            'Requester ID', 'Requester Name', 'Requester Email',
             'Group ID', 'Group Name',
-            'Company ID', 'Company Name',
+            'Organization ID', 'Organization Name',
             'Comments',
         ]);
 
@@ -36,15 +36,15 @@ class ZendeskTicketExporter
                 $ticket['status'] ?? '',
                 $ticket['priority'] ?? '',
                 $ticket['assignee_id'] ?? '',
-                $ticket['assignee_name'] ?? '',
-                $ticket['assignee_email'] ?? '',
+                $ticket['assignee']['name'] ?? '',
+                $ticket['assignee']['email'] ?? '',
                 $ticket['requester_id'] ?? '',
-                $ticket['requester']['name'] ?? '', // Припустимо, що ім'я запитувача знаходиться за шляхом $ticket['requester']['name']
-                $ticket['requester']['email'] ?? '', // Припустимо, що електронна пошта запитувача знаходиться за шляхом $ticket['requester']['email']
+                $ticket['requester']['name'] ?? '',
+                $ticket['requester']['email'] ?? '',
                 $ticket['group_id'] ?? '',
                 $ticket['group_name'] ?? '',
-                $ticket['company_id'] ?? '',
-                $ticket['company_name'] ?? '',
+                $ticket['organization_id'] ?? '',
+                $ticket['organization_name'] ?? '',
                 $comments,
             ];
 

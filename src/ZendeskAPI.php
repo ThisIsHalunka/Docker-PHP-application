@@ -1,6 +1,7 @@
 <?php
 
 require 'vendor/autoload.php';
+
 class ZendeskAPI
 {
     private $client;
@@ -14,7 +15,7 @@ class ZendeskAPI
         $this->email = $email;
         $this->token = $token;
 
-        $this->client = new \GuzzleHttp\Client([
+        $this->client = new GuzzleHttp\Client([
             'base_uri' => "https://{$this->subdomain}.zendesk.com/api/v2/",
             'auth' => [$this->email . '/token', $this->token],
         ]);
@@ -22,14 +23,29 @@ class ZendeskAPI
 
     public function getTickets()
     {
-        $response = $this->client->request('GET', 'tickets.json', [
-            'query' => [
-                'query' => 'type:ticket status<solved',
-            ],
-        ]);
+        $tickets = [];
+        $page = 1;
+        $perPage = 100;
 
-        $tickets = json_decode($response->getBody()->getContents(), true);
+        while (true) {
+            $response = $this->client->request('GET', 'tickets.json', [
+                'query' => [
+                    'query' => 'type:ticket status<solved',
+                    'page' => $page,
+                    'per_page' => $perPage,
+                ],
+            ]);
 
-        return $tickets['tickets'];
+            $data = json_decode($response->getBody()->getContents(), true);
+            $tickets = array_merge($tickets, $data['tickets']);
+
+            if (count($data['tickets']) < $perPage) {
+                break;
+            }
+
+            $page++;
+        }
+
+        return $tickets;
     }
 }
